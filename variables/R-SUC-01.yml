@@ -1,0 +1,10 @@
+---
+hostname: R-SUC-01
+trunk_interface:
+  name: GigabitEthernet0/0
+  description: TRONCAL HACIA SW-SUC-01-CORE
+automation_link:
+  interface: GigabitEthernet0/2
+  description: ENLACE DE AUTOMATIZACION HACIA UBUNTU SERVER
+  ip: 192.168.100.1
+  mask: 255.255.255.0

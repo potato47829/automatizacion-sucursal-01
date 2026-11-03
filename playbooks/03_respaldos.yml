@@ -1,0 +1,56 @@
+---
+- name: Respaldar la evidencia de los switches
+  hosts: switches
+  gather_facts: false
+  tasks:
+    - name: Obtener configuración actual y estado de VLAN
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+          - show vlan brief
+      register: evidencia
+
+    - name: Crear la carpeta del equipo
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}"
+        state: directory
+        mode: "0755"
+      delegate_to: localhost
+
+    - name: Guardar running-config
+      ansible.builtin.copy:
+        content: "{{ evidencia.stdout[0] }}\n"
+        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/running-config.txt"
+        mode: "0644"
+      delegate_to: localhost
+
+    - name: Guardar el estado de las VLAN
+      ansible.builtin.copy:
+        content: "{{ evidencia.stdout[1] }}\n"
+        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/vlan-brief.txt"
+        mode: "0644"
+      delegate_to: localhost
+
+- name: Respaldar la configuración del router
+  hosts: routers
+  gather_facts: false
+  tasks:
+    - name: Obtener configuración actual
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: evidencia
+
+    - name: Crear la carpeta del equipo
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}"
+        state: directory
+        mode: "0755"
+      delegate_to: localhost
+
+    - name: Guardar running-config
+      ansible.builtin.copy:
+        content: "{{ evidencia.stdout[0] }}\n"
+        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/running-config.txt"
+        mode: "0644"
+      delegate_to: localhost

@@ -1,0 +1,18 @@
+---
+native_vlan: 99
+vlans:
+  - id: 10
+    name: USUARIOS_VLAN10
+    network: 192.168.10.0/24
+    gateway: 192.168.10.1
+    mask: 255.255.255.0
+  - id: 20
+    name: USUARIOS_VLAN20
+    network: 192.168.20.0/24
+    gateway: 192.168.20.1
+    mask: 255.255.255.0
+  - id: 99
+    name: GESTION
+    network: 192.168.99.0/24
+    gateway: 192.168.99.1
+    mask: 255.255.255.0

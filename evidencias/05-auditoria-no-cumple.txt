@@ -1,0 +1,24 @@
+
+=== SW-SUC-01-ACC1 ===
+  [CUMPLE   ] VLAN 10 (USUARIOS_VLAN10)
+  [CUMPLE   ] VLAN 20 (USUARIOS_VLAN20)
+  [CUMPLE   ] VLAN 99 (GESTION)
+  [CUMPLE   ] GigabitEthernet0/0 troncal
+  [CUMPLE   ] GigabitEthernet0/1 acceso VLAN 10
+  [CUMPLE   ] GigabitEthernet0/2 acceso VLAN 20
+  [CUMPLE   ] GigabitEthernet0/3 acceso VLAN 99
+
+=== SW-SUC-01-CORE ===
+  [CUMPLE   ] VLAN 10 (USUARIOS_VLAN10)
+  [CUMPLE   ] VLAN 20 (USUARIOS_VLAN20)
+  [CUMPLE   ] VLAN 99 (GESTION)
+  [CUMPLE   ] GigabitEthernet0/0 troncal
+  [CUMPLE   ] GigabitEthernet1/2 troncal
+  [CUMPLE   ] GigabitEthernet0/1 acceso VLAN 10
+  [CUMPLE   ] GigabitEthernet0/2 acceso VLAN 10
+  [NO CUMPLE] GigabitEthernet1/0 acceso VLAN 20
+      - VLAN de acceso esperada 20, encontrada 10
+  [CUMPLE   ] GigabitEthernet1/1 acceso VLAN 20
+  [CUMPLE   ] GigabitEthernet0/3 acceso VLAN 99
+
+Resumen: 16 de 17 elementos cumplen; 1 no cumplen.

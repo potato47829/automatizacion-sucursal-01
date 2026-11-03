@@ -1,0 +1,16 @@
+---
+hostname: SW-SUC-01-ACC1
+management:
+  vlan: 99
+  ip: 192.168.99.3
+  mask: 255.255.255.0
+  gateway: 192.168.99.1
+trunks:
+  - interface: GigabitEthernet0/0
+    description: TRONCAL HACIA SW-SUC-01-CORE
+    native_vlan: 99
+    allowed_vlans: [10, 20, 99]
+access_ports:
+  - {interface: GigabitEthernet0/1, vlan: 10, description: "ACCESO VLAN10 PC5"}
+  - {interface: GigabitEthernet0/2, vlan: 20, description: "ACCESO VLAN20 PC6"}
+  - {interface: GigabitEthernet0/3, vlan: 99, description: "ACCESO VLAN99 PC8"}

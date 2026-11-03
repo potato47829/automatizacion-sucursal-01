@@ -1,0 +1,32 @@
+
+PLAY [Pruebas de conectividad desde R-SUC-01] **********************************
+
+TASK [Ping del router a la gestión de los switches] ****************************
+[WARNING]: ansible-pylibssh not installed, falling back to paramiko
+ok: [R-SUC-01] => (item=192.168.99.2)
+ok: [R-SUC-01] => (item=192.168.99.3)
+
+TASK [Ping del router a cada PC (confirma la VLAN de cada puerto)] *************
+ok: [R-SUC-01] => (item=192.168.10.11)
+ok: [R-SUC-01] => (item=192.168.10.12)
+ok: [R-SUC-01] => (item=192.168.10.13)
+ok: [R-SUC-01] => (item=192.168.20.11)
+ok: [R-SUC-01] => (item=192.168.20.12)
+ok: [R-SUC-01] => (item=192.168.20.13)
+ok: [R-SUC-01] => (item=192.168.99.11)
+ok: [R-SUC-01] => (item=192.168.99.12)
+
+PLAY [Pruebas desde el Ubuntu Server] ******************************************
+
+TASK [Ping a gateways y direcciones de gestión] ********************************
+ok: [localhost] => (item=192.168.100.1)
+ok: [localhost] => (item=192.168.10.1)
+ok: [localhost] => (item=192.168.20.1)
+ok: [localhost] => (item=192.168.99.1)
+ok: [localhost] => (item=192.168.99.2)
+ok: [localhost] => (item=192.168.99.3)
+
+PLAY RECAP *********************************************************************
+R-SUC-01                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

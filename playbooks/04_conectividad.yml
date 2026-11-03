@@ -1,0 +1,43 @@
+---
+- name: Pruebas de conectividad desde R-SUC-01
+  hosts: routers
+  gather_facts: false
+  vars:
+    gestion: [192.168.99.2, 192.168.99.3]
+    equipos_finales:
+      - 192.168.10.11
+      - 192.168.10.12
+      - 192.168.10.13
+      - 192.168.20.11
+      - 192.168.20.12
+      - 192.168.20.13
+      - 192.168.99.11
+      - 192.168.99.12
+  tasks:
+    - name: Ping del router a la gestión de los switches
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        count: 5
+      loop: "{{ gestion }}"
+
+    - name: Ping del router a cada PC (confirma la VLAN de cada puerto)
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        count: 5
+      loop: "{{ equipos_finales }}"
+
+- name: Pruebas desde el Ubuntu Server
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Ping a gateways y direcciones de gestión
+      ansible.builtin.command: "ping -c 3 -W 2 {{ item }}"
+      loop:
+        - 192.168.100.1
+        - 192.168.10.1
+        - 192.168.20.1
+        - 192.168.99.1
+        - 192.168.99.2
+        - 192.168.99.3
+      changed_when: false

@@ -1,0 +1,65 @@
+---
+- name: Configurar los switches de la Sucursal 01
+  hosts: switches
+  gather_facts: false
+  vars_files:
+    - ../variables/vlans.yml
+    - "../variables/{{ inventory_hostname }}.yml"
+
+  tasks:
+    - name: Crear las VLAN con su nombre
+      cisco.ios.ios_vlans:
+        config:
+          - vlan_id: "{{ item.id }}"
+            name: "{{ item.name }}"
+            state: active
+        state: merged
+      loop: "{{ vlans }}"
+      loop_control:
+        label: "VLAN {{ item.id }}"
+
+    - name: Dirección de gestión en la SVI
+      cisco.ios.ios_config:
+        parents: "interface Vlan{{ management.vlan }}"
+        lines:
+          - "ip address {{ management.ip }} {{ management.mask }}"
+
+    - name: Encender la SVI de gestión
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "Vlan{{ management.vlan }}"
+            enabled: true
+        state: merged
+
+    - name: Ruta por defecto hacia el gateway de gestión
+      cisco.ios.ios_config:
+        lines:
+          - "ip route 0.0.0.0 0.0.0.0 {{ management.gateway }}"
+
+    - name: Enlaces troncales (VLAN nativa 99, permitidas 10, 20 y 99)
+      cisco.ios.ios_config:
+        parents: "interface {{ item.interface }}"
+        lines:
+          - "description {{ item.description }}"
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+          - "switchport trunk native vlan {{ item.native_vlan }}"
+          - "switchport trunk allowed vlan {{ item.allowed_vlans | join(',') }}"
+      loop: "{{ trunks }}"
+      loop_control:
+        label: "{{ item.interface }}"
+
+    - name: Puertos de acceso
+      cisco.ios.ios_config:
+        parents: "interface {{ item.interface }}"
+        lines:
+          - "description {{ item.description }}"
+          - switchport mode access
+          - "switchport access vlan {{ item.vlan }}"
+      loop: "{{ access_ports }}"
+      loop_control:
+        label: "{{ item.interface }} VLAN {{ item.vlan }}"
+
+    - name: Guardar la configuración si hay diferencias con la de arranque
+      cisco.ios.ios_config:
+        save_when: modified

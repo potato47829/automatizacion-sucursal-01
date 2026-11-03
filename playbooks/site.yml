@@ -1,0 +1,4 @@
+---
+- import_playbook: 01_router.yml
+- import_playbook: 02_switches.yml
+- import_playbook: 03_respaldos.yml

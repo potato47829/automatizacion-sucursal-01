@@ -1,0 +1,112 @@
+[WARNING]: skipping vars_files item due to an undefined variable
+Origin: /home/gabs/automatizacion-sucursal-01/playbooks/01_router.yml:7:7
+
+5   vars_files:
+6     - ../variables/vlans.yml
+7     - "../variables/{{ inventory_hostname }}.yml"
+        ^ column 7
+
+
+PLAY [Configurar el router R-SUC-01 (router on a stick)] ***********************
+
+TASK [Interfaz troncal fisica hacia el core] ***********************************
+[WARNING]: ansible-pylibssh not installed, falling back to paramiko
+ok: [R-SUC-01]
+
+TASK [Subinterfaces 802.1Q una por VLAN] ***************************************
+ok: [R-SUC-01] => (item=GigabitEthernet0/0.10)
+ok: [R-SUC-01] => (item=GigabitEthernet0/0.20)
+ok: [R-SUC-01] => (item=GigabitEthernet0/0.99)
+
+TASK [Enlace de automatizacion hacia el Ubuntu Server] *************************
+ok: [R-SUC-01]
+
+TASK [Mantener encendida la interfaz de automatizacion] ************************
+ok: [R-SUC-01]
+
+TASK [Guardar la configuracion si hay diferencias] *****************************
+[WARNING]: skipping vars_files item due to an undefined variable
+Origin: /home/gabs/automatizacion-sucursal-01/playbooks/02_switches.yml:7:7
+
+5   vars_files:
+6     - ../variables/vlans.yml
+7     - "../variables/{{ inventory_hostname }}.yml"
+        ^ column 7
+
+ok: [R-SUC-01]
+
+PLAY [Configurar los switches de la Sucursal 01] *******************************
+
+TASK [Crear las VLAN con su nombre] ********************************************
+ok: [SW-SUC-01-ACC1] => (item=VLAN 10)
+ok: [SW-SUC-01-CORE] => (item=VLAN 10)
+ok: [SW-SUC-01-ACC1] => (item=VLAN 20)
+ok: [SW-SUC-01-CORE] => (item=VLAN 20)
+ok: [SW-SUC-01-ACC1] => (item=VLAN 99)
+ok: [SW-SUC-01-CORE] => (item=VLAN 99)
+
+TASK [Dirección de gestión en la SVI] ******************************************
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+TASK [Encender la SVI de gestión] **********************************************
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+TASK [Ruta por defecto hacia el gateway de gestión] ****************************
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+TASK [Enlaces troncales (VLAN nativa 99, permitidas 10, 20 y 99)] **************
+ok: [SW-SUC-01-ACC1] => (item=GigabitEthernet0/0)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet0/0)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet1/2)
+
+TASK [Puertos de acceso] *******************************************************
+ok: [SW-SUC-01-ACC1] => (item=GigabitEthernet0/1 VLAN 10)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet0/1 VLAN 10)
+ok: [SW-SUC-01-ACC1] => (item=GigabitEthernet0/2 VLAN 20)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet0/2 VLAN 10)
+ok: [SW-SUC-01-ACC1] => (item=GigabitEthernet0/3 VLAN 99)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet1/0 VLAN 20)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet1/1 VLAN 20)
+ok: [SW-SUC-01-CORE] => (item=GigabitEthernet0/3 VLAN 99)
+
+TASK [Guardar la configuración si hay diferencias con la de arranque] **********
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+PLAY [Respaldar la evidencia de los switches] **********************************
+
+TASK [Obtener configuración actual y estado de VLAN] ***************************
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+TASK [Crear la carpeta del equipo] *********************************************
+ok: [SW-SUC-01-ACC1 -> localhost]
+ok: [SW-SUC-01-CORE -> localhost]
+
+TASK [Guardar running-config] **************************************************
+ok: [SW-SUC-01-CORE -> localhost]
+ok: [SW-SUC-01-ACC1 -> localhost]
+
+TASK [Guardar el estado de las VLAN] *******************************************
+ok: [SW-SUC-01-ACC1 -> localhost]
+ok: [SW-SUC-01-CORE -> localhost]
+
+PLAY [Respaldar la configuración del router] ***********************************
+
+TASK [Obtener configuración actual] ********************************************
+ok: [R-SUC-01]
+
+TASK [Crear la carpeta del equipo] *********************************************
+ok: [R-SUC-01 -> localhost]
+
+TASK [Guardar running-config] **************************************************
+ok: [R-SUC-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+R-SUC-01                   : ok=8    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+SW-SUC-01-ACC1             : ok=11   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+SW-SUC-01-CORE             : ok=11   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,45 @@
+---
+- name: Configurar el router R-SUC-01 (router on a stick)
+  hosts: routers
+  gather_facts: false
+  vars_files:
+    - ../variables/vlans.yml
+    - "../variables/{{ inventory_hostname }}.yml"
+
+  tasks:
+    - name: Interfaz troncal fisica hacia el core
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ trunk_interface.name }}"
+            description: "{{ trunk_interface.description }}"
+            enabled: true
+        state: merged
+
+    - name: Subinterfaces 802.1Q una por VLAN
+      cisco.ios.ios_config:
+        parents: "interface {{ trunk_interface.name }}.{{ item.id }}"
+        lines:
+          - "description GATEWAY {{ item.name }}"
+          - "encapsulation dot1Q {{ item.id }}{{ ' native' if item.id == native_vlan else '' }}"
+          - "ip address {{ item.gateway }} {{ item.mask }}"
+      loop: "{{ vlans }}"
+      loop_control:
+        label: "{{ trunk_interface.name }}.{{ item.id }}"
+
+    - name: Enlace de automatizacion hacia el Ubuntu Server
+      cisco.ios.ios_config:
+        parents: "interface {{ automation_link.interface }}"
+        lines:
+          - "description {{ automation_link.description }}"
+          - "ip address {{ automation_link.ip }} {{ automation_link.mask }}"
+
+    - name: Mantener encendida la interfaz de automatizacion
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ automation_link.interface }}"
+            enabled: true
+        state: merged
+
+    - name: Guardar la configuracion si hay diferencias
+      cisco.ios.ios_config:
+        save_when: modified
