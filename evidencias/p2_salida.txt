@@ -1,0 +1,13 @@
+Datos leidos: /home/gabs/automatizacion-sucursal-01/datos/sucursal_02_entrada.yml
+Bloque disponible 10.20.0.0/23 (512 direcciones); 3 VLAN requeridas
+
+PLAN DE DIRECCIONAMIENTO SUCURSAL-02
+VLAN Nombre          Red             Mascara         Gateway      Previstos  Utilizables
+10   ADMINISTRACION  10.20.0.0/26    255.255.255.192 10.20.0.1           50           62
+20   OPERACION       10.20.0.64/27   255.255.255.224 10.20.0.65          25           30
+99   GESTION         10.20.0.96/28   255.255.255.240 10.20.0.97          10           14
+
+Uso del bloque: 112 de 512 direcciones (21.9%)
+Libre: 10.20.0.112/28, 10.20.0.128/25, 10.20.1.0/24
+Verificacion de solapamiento: OK, sin solapamientos
+Archivo generado: /home/gabs/automatizacion-sucursal-01/variables/sucursal_02_generada.yml

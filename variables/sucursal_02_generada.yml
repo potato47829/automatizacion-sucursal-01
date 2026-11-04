@@ -1,0 +1,29 @@
+# Generado por python/generar_sucursal_02.py. No editar a mano.
+sucursal: SUCURSAL-02
+bloque: 10.20.0.0/23
+native_vlan: 99
+vlans:
+- id: 10
+  name: ADMINISTRACION
+  network: 10.20.0.0/26
+  mask: 255.255.255.192
+  prefix: 26
+  gateway: 10.20.0.1
+  hosts_previstos: 50
+  hosts_utilizables: 62
+- id: 20
+  name: OPERACION
+  network: 10.20.0.64/27
+  mask: 255.255.255.224
+  prefix: 27
+  gateway: 10.20.0.65
+  hosts_previstos: 25
+  hosts_utilizables: 30
+- id: 99
+  name: GESTION
+  network: 10.20.0.96/28
+  mask: 255.255.255.240
+  prefix: 28
+  gateway: 10.20.0.97
+  hosts_previstos: 10
+  hosts_utilizables: 14
