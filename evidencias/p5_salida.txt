@@ -1,0 +1,8 @@
+Datos leidos: inventario/hosts.yml (3 destinos). Condicion: perdida 0% y latencia promedio <= 50 ms
+
+DESTINO         IP               ENV  REC  PERD%     MIN    PROM     MAX  RESULTADO
+R-SUC-01        192.168.100.1     10   10    0.0    2.21    3.05    3.97  CUMPLE
+SW-SUC-01-CORE  192.168.99.2      10   10    0.0    6.07   13.59   47.94  CUMPLE
+SW-SUC-01-ACC1  192.168.99.3      10   10    0.0   12.98   16.99   23.16  CUMPLE
+
+Resumen: 3 de 3 destinos cumplen. CSV: /home/gabs/automatizacion-sucursal-01/evidencias/mediciones_conectividad.csv
