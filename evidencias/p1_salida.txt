@@ -1,0 +1,49 @@
+PROTOTIPO 1 - CAMBIO-001: Identificar al usuario de PC1 en la descripcion del puerto
+Datos leidos: /home/gabs/automatizacion-sucursal-01/evidencias/antes, /home/gabs/automatizacion-sucursal-01/evidencias/despues, /home/gabs/automatizacion-sucursal-01/datos/cambio_aprobado.yml, variables/*.yml
+
+-- Cambio solicitado
+  [CAMBIO APLICADO CORRECTAMENTE] SW-SUC-01-CORE GigabitEthernet0/2 description: 'ACCESO VLAN10 PC1' -> 'ACCESO VLAN10 PC1 CAMBIO-001'
+
+-- Elementos criticos (deben ser iguales antes y despues)
+  R-SUC-01
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0 troncal fisico: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.10 gateway VLAN 10: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.10 gateway VLAN 10: estado (show ip interface brief)
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.20 gateway VLAN 20: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.20 gateway VLAN 20: estado (show ip interface brief)
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.99 gateway VLAN 99: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0.99 gateway VLAN 99: estado (show ip interface brief)
+    [ELEMENTO CRITICO SIN CAMBIOS] Hostname
+    [ELEMENTO CRITICO SIN CAMBIOS] Rutas (show ip route)
+  SW-SUC-01-CORE
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 10 (USUARIOS_VLAN10) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 20 (USUARIOS_VLAN20) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 99 (GESTION) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0 troncal: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0 troncal: estado operativo (show interfaces trunk)
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet1/2 troncal: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet1/2 troncal: estado operativo (show interfaces trunk)
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/1 acceso VLAN 10: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/2 acceso VLAN 10: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet1/0 acceso VLAN 20: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet1/1 acceso VLAN 20: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/3 acceso VLAN 99: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] Vlan99 gestion 192.168.99.2: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] Vlan99 gestion: estado (show ip interface brief)
+    [ELEMENTO CRITICO SIN CAMBIOS] Hostname
+    [ELEMENTO CRITICO SIN CAMBIOS] Rutas (show ip route)
+  SW-SUC-01-ACC1
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 10 (USUARIOS_VLAN10) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 20 (USUARIOS_VLAN20) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] VLAN 99 (GESTION) existe, nombre y estado
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0 troncal: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/0 troncal: estado operativo (show interfaces trunk)
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/1 acceso VLAN 10: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/2 acceso VLAN 20: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] GigabitEthernet0/3 acceso VLAN 99: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] Vlan99 gestion 192.168.99.3: configuracion
+    [ELEMENTO CRITICO SIN CAMBIOS] Vlan99 gestion: estado (show ip interface brief)
+    [ELEMENTO CRITICO SIN CAMBIOS] Hostname
+    [ELEMENTO CRITICO SIN CAMBIOS] Rutas (show ip route)
+
+Resultado: el cambio se aplico y los elementos criticos se conservaron

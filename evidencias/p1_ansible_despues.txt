@@ -1,0 +1,36 @@
+
+PLAY [Obtener y guardar la evidencia de los equipos] ***************************
+
+TASK [Ejecutar los comandos de evidencia] **************************************
+ok: [R-SUC-01]
+ok: [SW-SUC-01-ACC1]
+ok: [SW-SUC-01-CORE]
+
+TASK [Crear la carpeta del equipo] *********************************************
+changed: [SW-SUC-01-CORE -> localhost]
+changed: [R-SUC-01 -> localhost]
+changed: [SW-SUC-01-ACC1 -> localhost]
+
+TASK [Guardar cada salida como archivo de texto] *******************************
+changed: [SW-SUC-01-CORE -> localhost] => (item=running-config.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=running-config.txt)
+changed: [R-SUC-01 -> localhost] => (item=running-config.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=version.txt)
+changed: [SW-SUC-01-CORE -> localhost] => (item=version.txt)
+changed: [R-SUC-01 -> localhost] => (item=version.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=ip-interface-brief.txt)
+changed: [R-SUC-01 -> localhost] => (item=ip-interface-brief.txt)
+changed: [SW-SUC-01-CORE -> localhost] => (item=ip-interface-brief.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=ip-route.txt)
+changed: [R-SUC-01 -> localhost] => (item=ip-route.txt)
+changed: [SW-SUC-01-CORE -> localhost] => (item=ip-route.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=vlan-brief.txt)
+changed: [SW-SUC-01-CORE -> localhost] => (item=vlan-brief.txt)
+changed: [SW-SUC-01-ACC1 -> localhost] => (item=interfaces-trunk.txt)
+changed: [SW-SUC-01-CORE -> localhost] => (item=interfaces-trunk.txt)
+
+PLAY RECAP *********************************************************************
+R-SUC-01                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+SW-SUC-01-ACC1             : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+SW-SUC-01-CORE             : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
