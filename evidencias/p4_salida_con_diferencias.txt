@@ -1,0 +1,30 @@
+Datos leidos: datos/ipam_sucursal_01_con_diferencias.json (3 prefijos, 3 dispositivos), variables/*.yml, inventario/hosts.yml y /home/gabs/automatizacion-sucursal-01/respaldos/<equipo>/
+
+== COINCIDENCIAS (11) ==
+  [COINCIDENCIA] VLAN 10 nombre: IPAM=USUARIOS_VLAN10, YAML=USUARIOS_VLAN10, SW-SUC-01-CORE (vlan-brief)=USUARIOS_VLAN10
+  [COINCIDENCIA] VLAN 10 red: IPAM=192.168.10.0/24, YAML=192.168.10.0/24, R-SUC-01 (running-config)=192.168.10.0/24
+  [COINCIDENCIA] VLAN 10 gateway: IPAM=192.168.10.1, YAML=192.168.10.1, R-SUC-01 (running-config)=192.168.10.1
+  [COINCIDENCIA] VLAN 20 nombre: IPAM=USUARIOS_VLAN20, YAML=USUARIOS_VLAN20, SW-SUC-01-CORE (vlan-brief)=USUARIOS_VLAN20
+  [COINCIDENCIA] VLAN 20 red: IPAM=192.168.20.0/24, YAML=192.168.20.0/24, R-SUC-01 (running-config)=192.168.20.0/24
+  [COINCIDENCIA] VLAN 99 nombre: IPAM=GESTION, YAML=GESTION, SW-SUC-01-CORE (vlan-brief)=GESTION
+  [COINCIDENCIA] VLAN 99 gateway: IPAM=192.168.99.1, YAML=192.168.99.1, R-SUC-01 (running-config)=192.168.99.1
+  [COINCIDENCIA] SW-SUC-01-ACC1 direccion de gestion: IPAM=192.168.99.3, YAML=192.168.99.3, inventario (ansible_host)=192.168.99.3, running-config=192.168.99.3
+  [COINCIDENCIA] SW-SUC-01-ACC1 nombre: IPAM=SW-SUC-01-ACC1, inventario=SW-SUC-01-ACC1, running-config=SW-SUC-01-ACC1
+  [COINCIDENCIA] SW-SUC-01-CORE nombre: IPAM=SW-SUC-01-CORE, inventario=SW-SUC-01-CORE, running-config=SW-SUC-01-CORE
+  [COINCIDENCIA] SW-SUC-01-CORE funcion: IPAM=switch, inventario (grupo)=switch
+
+== FALTANTES (6) ==
+  [FALTANTE] R-SUC-01 direccion de gestion: no aparece en IPAM (YAML=192.168.100.1, inventario (ansible_host)=192.168.100.1, running-config=192.168.100.1)
+  [FALTANTE] R-SUC-01 nombre: no aparece en IPAM (inventario=R-SUC-01, running-config=R-SUC-01)
+  [FALTANTE] R-SUC-01 funcion: no aparece en IPAM (inventario (grupo)=router)
+  [FALTANTE] SW-SUC-01-ACC2 direccion de gestion: no aparece en YAML, inventario (ansible_host), running-config (IPAM=192.168.99.4)
+  [FALTANTE] SW-SUC-01-ACC2 nombre: no aparece en inventario, running-config (IPAM=SW-SUC-01-ACC2)
+  [FALTANTE] SW-SUC-01-ACC2 funcion: no aparece en inventario (grupo) (IPAM=switch)
+
+== DIFERENCIAS (4) ==
+  [DIFERENCIA] VLAN 20 gateway: IPAM=192.168.20.254, YAML=192.168.20.1, R-SUC-01 (running-config)=192.168.20.1
+  [DIFERENCIA] VLAN 99 red: IPAM=192.168.98.0/24, YAML=192.168.99.0/24, R-SUC-01 (running-config)=192.168.99.0/24
+  [DIFERENCIA] SW-SUC-01-ACC1 funcion: IPAM=router, inventario (grupo)=switch
+  [DIFERENCIA] SW-SUC-01-CORE direccion de gestion: IPAM=192.168.99.22, YAML=192.168.99.2, inventario (ansible_host)=192.168.99.2, running-config=192.168.99.2
+
+Resumen: 11 coincidencias, 6 faltantes, 4 diferencias.
