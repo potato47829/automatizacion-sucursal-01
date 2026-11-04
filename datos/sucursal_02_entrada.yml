@@ -1,0 +1,7 @@
+---
+sucursal: SUCURSAL-02
+bloque_disponible: 10.20.0.0/23
+vlans:
+  - {id: 10, nombre: ADMINISTRACION, dispositivos: 50}
+  - {id: 20, nombre: OPERACION, dispositivos: 25}
+  - {id: 99, nombre: GESTION, dispositivos: 10}

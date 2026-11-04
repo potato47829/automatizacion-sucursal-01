@@ -1,0 +1,41 @@
+{
+  "fuente": "IPAM simulado (respuesta tipo API)",
+  "sitio": "SUCURSAL-01",
+  "prefijos": [
+    {
+      "vlan": 10,
+      "nombre": "USUARIOS_VLAN10",
+      "red": "192.168.10.0/24",
+      "gateway": "192.168.10.1"
+    },
+    {
+      "vlan": 20,
+      "nombre": "USUARIOS_VLAN20",
+      "red": "192.168.20.0/24",
+      "gateway": "192.168.20.254"
+    },
+    {
+      "vlan": 99,
+      "nombre": "GESTION",
+      "red": "192.168.98.0/24",
+      "gateway": "192.168.99.1"
+    }
+  ],
+  "dispositivos": [
+    {
+      "nombre": "SW-SUC-01-CORE",
+      "funcion": "switch",
+      "direccion_gestion": "192.168.99.22"
+    },
+    {
+      "nombre": "SW-SUC-01-ACC1",
+      "funcion": "router",
+      "direccion_gestion": "192.168.99.3"
+    },
+    {
+      "nombre": "SW-SUC-01-ACC2",
+      "funcion": "switch",
+      "direccion_gestion": "192.168.99.4"
+    }
+  ]
+}

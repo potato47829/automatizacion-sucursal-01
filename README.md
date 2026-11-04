@@ -27,7 +27,7 @@ auditoría de cumplimiento con Python.
 
 Ubuntu Server con Python 3, Ansible, PyYAML y paramiko 3.5.1 en un entorno
 virtual, y la colección cisco.ios. Los equipos deben tener SSH habilitado y el
-usuario admin (configuración inicial manual descrita en docs/).
+usuario admin (configuración inicial manual descrita en documentacion/).
 
 ## Uso
 
@@ -62,3 +62,10 @@ Switch1 (conecta PC8) es un equipo de capa 2 fuera del alcance: no está en el
 inventario ni se configura. La red 192.168.100.0/24 es el enlace de
 automatización entre el Ubuntu Server y R-SUC-01 (Gi0/2).
 
+
+## Prototipos de Python aplicados a redes
+
+Cinco prototipos en `python/` (validar cambios, generar datos de una nueva sede, auditar la flota,
+relacionar fuentes y medir conectividad). Propósito, entradas, salidas y conclusión en
+[documentacion/README.md](documentacion/README.md). Todos leen evidencias guardadas por Ansible y
+ninguno configura equipos ni abre SSH.

@@ -1,0 +1,11 @@
+---
+# Cambio aprobado CAMBIO-001: actualizar la descripcion de un puerto de acceso.
+# No es disruptivo: no modifica VLAN, troncales, gestion ni rutas.
+id_cambio: CAMBIO-001
+descripcion: Identificar al usuario de PC1 en la descripcion del puerto
+cambios:
+  - equipo: SW-SUC-01-CORE
+    interfaz: GigabitEthernet0/2
+    atributo: description
+    valor_antes: ACCESO VLAN10 PC1
+    valor_despues: ACCESO VLAN10 PC1 CAMBIO-001

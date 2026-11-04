@@ -4,7 +4,7 @@ configure terminal
 hostname R-SUC-01
 no ip domain-lookup
 ip domain-name sucursal01.local
-username admin privilege 15 secret Suc01Lab2026
+username admin privilege 15 secret <CLAVE_EN_VAULT>
 crypto key generate rsa modulus 2048
 ip ssh version 2
 line vty 0 4
@@ -29,7 +29,7 @@ configure terminal
 hostname SW-SUC-01-CORE
 no ip domain-lookup
 ip domain-name sucursal01.local
-username admin privilege 15 secret Suc01Lab2026
+username admin privilege 15 secret <CLAVE_EN_VAULT>
 crypto key generate rsa modulus 2048
 ip ssh version 2
 line vty 0 4
@@ -69,7 +69,7 @@ configure terminal
 hostname SW-SUC-01-ACC1
 no ip domain-lookup
 ip domain-name sucursal01.local
-username admin privilege 15 secret Suc01Lab2026
+username admin privilege 15 secret <CLAVE_EN_VAULT>
 crypto key generate rsa modulus 2048
 ip ssh version 2
 line vty 0 4
@@ -93,6 +93,6 @@ interface Vlan99
  ip address 192.168.99.3 255.255.255.0
  no shutdown
  exit
-ip route 0.0.0.0 0.0.0.0 19ss2.168.99.1
+ip route 0.0.0.0 0.0.0.0 192.168.99.1
 end
 write memory

@@ -1,56 +1,43 @@
 ---
-- name: Respaldar la evidencia de los switches
-  hosts: switches
+# Obtiene la evidencia de los tres equipos y la guarda en el servidor.
+# Por defecto va a respaldos/. Para otra carpeta:  -e destino=evidencias/antes
+- name: Obtener y guardar la evidencia de los equipos
+  hosts: routers:switches
   gather_facts: false
+  vars:
+    destino: respaldos
+    carpeta: "{{ playbook_dir }}/../{{ destino }}/{{ inventory_hostname }}"
+    comandos_comunes:
+      - {cmd: show running-config, archivo: running-config.txt}
+      - {cmd: show version, archivo: version.txt}
+      - {cmd: show ip interface brief, archivo: ip-interface-brief.txt}
+      - {cmd: show ip route, archivo: ip-route.txt}
+    comandos_switch:
+      - {cmd: show vlan brief, archivo: vlan-brief.txt}
+      - {cmd: show interfaces trunk, archivo: interfaces-trunk.txt}
+    comandos: "{{ comandos_comunes + (comandos_switch if inventory_hostname in groups['switches'] else []) }}"
+    # Se descartan usuarios/secretos y datos que cambian solos (tiempo encendido)
+    filtro: '^(username |enable (secret|password))|uptime is|System restarted at'
+
   tasks:
-    - name: Obtener configuración actual y estado de VLAN
+    - name: Ejecutar los comandos de evidencia
       cisco.ios.ios_command:
-        commands:
-          - show running-config
-          - show vlan brief
-      register: evidencia
+        commands: "{{ comandos | map(attribute='cmd') | list }}"
+      register: salida
 
     - name: Crear la carpeta del equipo
       ansible.builtin.file:
-        path: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}"
+        path: "{{ carpeta }}"
         state: directory
         mode: "0755"
       delegate_to: localhost
 
-    - name: Guardar running-config
+    - name: Guardar cada salida como archivo de texto
       ansible.builtin.copy:
-        content: "{{ evidencia.stdout[0] }}\n"
-        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/running-config.txt"
+        content: "{{ item.1.splitlines() | reject('search', filtro) | join('\n') }}\n"
+        dest: "{{ carpeta }}/{{ item.0.archivo }}"
         mode: "0644"
-      delegate_to: localhost
-
-    - name: Guardar el estado de las VLAN
-      ansible.builtin.copy:
-        content: "{{ evidencia.stdout[1] }}\n"
-        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/vlan-brief.txt"
-        mode: "0644"
-      delegate_to: localhost
-
-- name: Respaldar la configuración del router
-  hosts: routers
-  gather_facts: false
-  tasks:
-    - name: Obtener configuración actual
-      cisco.ios.ios_command:
-        commands:
-          - show running-config
-      register: evidencia
-
-    - name: Crear la carpeta del equipo
-      ansible.builtin.file:
-        path: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}"
-        state: directory
-        mode: "0755"
-      delegate_to: localhost
-
-    - name: Guardar running-config
-      ansible.builtin.copy:
-        content: "{{ evidencia.stdout[0] }}\n"
-        dest: "{{ playbook_dir }}/../respaldos/{{ inventory_hostname }}/running-config.txt"
-        mode: "0644"
+      loop: "{{ comandos | zip(salida.stdout) | list }}"
+      loop_control:
+        label: "{{ item.0.archivo }}"
       delegate_to: localhost
