@@ -45,7 +45,6 @@ multilink bundle-name authenticated
 !
 !
 !
-username admin privilege 15 secret 9 $9$5WP0ldU7ffGKif$7Zmw3nKySvUMcTY9whpAT2OoBuWvfGqRjCZFS6.g4pk
 !
 redundancy
 !

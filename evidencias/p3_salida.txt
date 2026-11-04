@@ -1,0 +1,44 @@
+Datos leidos: variables/*.yml y /home/gabs/automatizacion-sucursal-01/respaldos/<equipo>/ (running-config, version, vlan-brief, interfaces-trunk, ip-interface-brief)
+
+EQUIPO          RESULTADO  EVIDENCIA               CONDICION
+R-SUC-01        CUMPLE     running-config.txt      Hostname coincide con el diseno
+R-SUC-01        CUMPLE     running-config.txt      GigabitEthernet0/0 troncal (descripcion)
+R-SUC-01        CUMPLE     running-config.txt      Subinterfaz GigabitEthernet0/0.10 gateway VLAN 10
+R-SUC-01        CUMPLE     running-config.txt      Subinterfaz GigabitEthernet0/0.20 gateway VLAN 20
+R-SUC-01        CUMPLE     running-config.txt      Subinterfaz GigabitEthernet0/0.99 gateway VLAN 99
+R-SUC-01        CUMPLE     ip-interface-brief.txt  GigabitEthernet0/0.10 estado (show ip interface brief)
+R-SUC-01        CUMPLE     ip-interface-brief.txt  GigabitEthernet0/0.20 estado (show ip interface brief)
+R-SUC-01        CUMPLE     ip-interface-brief.txt  GigabitEthernet0/0.99 estado (show ip interface brief)
+R-SUC-01        CUMPLE     version.txt             Version de IOS identificada
+SW-SUC-01-CORE  CUMPLE     running-config.txt      Hostname coincide con el diseno
+SW-SUC-01-CORE  CUMPLE     running-config.txt      Ruta por defecto hacia el gateway de gestion
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet0/0 troncal (configuracion)
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet1/2 troncal (configuracion)
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet0/1 acceso VLAN 10
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet0/2 acceso VLAN 10
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet1/0 acceso VLAN 20
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet1/1 acceso VLAN 20
+SW-SUC-01-CORE  CUMPLE     running-config.txt      GigabitEthernet0/3 acceso VLAN 99
+SW-SUC-01-CORE  CUMPLE     vlan-brief.txt          VLAN 10 (USUARIOS_VLAN10)
+SW-SUC-01-CORE  CUMPLE     vlan-brief.txt          VLAN 20 (USUARIOS_VLAN20)
+SW-SUC-01-CORE  CUMPLE     vlan-brief.txt          VLAN 99 (GESTION)
+SW-SUC-01-CORE  CUMPLE     interfaces-trunk.txt    GigabitEthernet0/0 troncal (estado operativo)
+SW-SUC-01-CORE  CUMPLE     interfaces-trunk.txt    GigabitEthernet1/2 troncal (estado operativo)
+SW-SUC-01-CORE  CUMPLE     ip-interface-brief.txt  Vlan99 gestion (show ip interface brief)
+SW-SUC-01-CORE  CUMPLE     version.txt             Version de IOS identificada
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      Hostname coincide con el diseno
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      Ruta por defecto hacia el gateway de gestion
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      GigabitEthernet0/0 troncal (configuracion)
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      GigabitEthernet0/1 acceso VLAN 10
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      GigabitEthernet0/2 acceso VLAN 20
+SW-SUC-01-ACC1  CUMPLE     running-config.txt      GigabitEthernet0/3 acceso VLAN 99
+SW-SUC-01-ACC1  CUMPLE     vlan-brief.txt          VLAN 10 (USUARIOS_VLAN10)
+SW-SUC-01-ACC1  CUMPLE     vlan-brief.txt          VLAN 20 (USUARIOS_VLAN20)
+SW-SUC-01-ACC1  CUMPLE     vlan-brief.txt          VLAN 99 (GESTION)
+SW-SUC-01-ACC1  CUMPLE     interfaces-trunk.txt    GigabitEthernet0/0 troncal (estado operativo)
+SW-SUC-01-ACC1  CUMPLE     ip-interface-brief.txt  Vlan99 gestion (show ip interface brief)
+SW-SUC-01-ACC1  CUMPLE     version.txt             Version de IOS identificada
+FLOTA           CUMPLE     version.txt             Version de IOS homogenea entre switches
+
+Resumen: 38 de 38 condiciones cumplen; 0 no cumplen.
+CSV generado: /home/gabs/automatizacion-sucursal-01/evidencias/p3_auditoria_flota.csv

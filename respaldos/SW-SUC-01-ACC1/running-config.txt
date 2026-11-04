@@ -17,7 +17,6 @@ boot-end-marker
 !
 !
 !
-username admin privilege 15 secret 5 $1$drAZ$b6C3/rXLafIrRFXG8Axlv/
 no aaa new-model
 !
 !
